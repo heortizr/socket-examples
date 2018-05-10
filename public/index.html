@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Programa de Colas</title>
+</head>
+
+<body>
+    <h1>Programa de Colas</h1>
+
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        // escuchar sucesos
+        socket.on('connect', () => {
+            console.log('Conectado al server');
+        });
+        socket.on('disconnect', () => {
+            console.log('Perdimos conn al server');
+        });
+
+        // los emit son para enviar informacion
+        socket.emit('enviarMensaje', {
+            usuario: 'Hugo Ortiz',
+            mensaje: 'Hola Mundo'
+        });
+    </script>
+</body>
+
+</html>
