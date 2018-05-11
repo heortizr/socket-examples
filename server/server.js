@@ -15,16 +15,23 @@ app.use(express.static(publicPath));
 let io = socketIO(server);
 
 io.on('connection', (client) => {
+
     console.log('cliente conectado');
-    //console.log(client);
+
+    client.emit('enviarMensaje', {
+        usuario: 'Administrador',
+        mensaje: 'Bienvenido a la aplicacion'
+    });
 
     client.on('disconnect', () => {
         console.log('Usuario desconectado');
     });
 
     // escuchar a cliente
-    client.on('enviarMensaje', (message) => {
+    client.on('enviarMensaje', (message, callback) => {
+        client.broadcast.emit('enviarMensaje', message);
         console.log(message);
+        callback();
     });
 });
 

@@ -19,14 +19,22 @@
         socket.on('connect', () => {
             console.log('Conectado al server');
         });
+
         socket.on('disconnect', () => {
             console.log('Perdimos conn al server');
+        });
+
+        socket.on('enviarMensaje', (resp) => {
+            console.log('server message');
+            console.log(resp);
         });
 
         // los emit son para enviar informacion
         socket.emit('enviarMensaje', {
             usuario: 'Hugo Ortiz',
             mensaje: 'Hola Mundo'
+        }, (resp) => {
+            console.log('llego al callback');
         });
     </script>
 </body>
